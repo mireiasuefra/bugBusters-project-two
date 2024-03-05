@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface JuegosService {
 
-	public void cargarListaInicial();
+	public int cargarListaInicial();
 	
 	List<Juego> findAll();
 }

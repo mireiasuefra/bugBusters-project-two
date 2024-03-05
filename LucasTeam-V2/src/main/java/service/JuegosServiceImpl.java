@@ -23,17 +23,19 @@ public class JuegosServiceImpl implements JuegosService {
 	}
 
 	@Override
-	public void cargarListaInicial() {
+	public int cargarListaInicial() {
 		int longCSV = 0;
+		Juego juegoEntity = null;
         try (Scanner scanner = new Scanner(new File("res/juegos.csv"))) {
 			scanner.nextLine();
 			while (scanner.hasNextLine()) {
-				juegoDao.save(leerJuegoString(scanner.nextLine()));
+				juegoEntity = juegoDao.save(leerJuegoString(scanner.nextLine()));
 				++longCSV;
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage() + "res/juegos.csv not found");
 		}
+        return juegoEntity.getId();
 	}
 
 	private Juego leerJuegoString(String linea) {
