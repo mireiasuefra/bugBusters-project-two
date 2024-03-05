@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +21,11 @@ public class JuegosServiceImpl implements JuegosService {
 	@Override
 	public List<Juego> findAll() {
 		return juegoDao.findAll();
+	}
+	
+	@Override
+	public Optional<Juego> findById(int id) {
+		return juegoDao.findById(id);
 	}
 
 	@Override

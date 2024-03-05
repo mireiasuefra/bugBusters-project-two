@@ -16,4 +16,6 @@ public interface JuegoDao extends JpaRepository<Juego ,Integer> {
 	// Juego save(Juego juego);
 	
 	// List<Juego> findAll();
+	
+	// Juego findById(Long id);
 }
