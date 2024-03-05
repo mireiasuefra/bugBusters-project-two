@@ -1,16 +1,16 @@
 package service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import repository.Juego;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import model.Genre;
+import model.Juego;
+import model.Platform;
 import repository.JuegoDao;
-import repository.Optional;
 
 public class JuegosServiceImpl implements JuegosService {
 	
@@ -24,12 +24,12 @@ public class JuegosServiceImpl implements JuegosService {
 
 	@Override
 	public void cargarListaInicial() {
-		int longCSV = 0;
+		//int longCSV = 0;
         try (Scanner scanner = new Scanner(new File("res/juegos.csv"))) {
 			scanner.nextLine();
 			while (scanner.hasNextLine()) {
 				juegoDao.save(leerJuegoString(scanner.nextLine()));
-				++longCSV;
+				//++longCSV;
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage() + "res/juegos.csv not found");
@@ -63,6 +63,7 @@ public class JuegosServiceImpl implements JuegosService {
 			
 			juego.setGenero(Genre.fromString(restoDatos[3]));
 			juego.setEditor(restoDatos[4]);
+			juego.setVentas(Float.parseFloat(restoDatos[6]));
 		} else {
 			String[] datosJuego = linea.split(",");
 			juego.setNombre(datosJuego[1]);
@@ -77,6 +78,7 @@ public class JuegosServiceImpl implements JuegosService {
 
 			juego.setGenero(Genre.fromString(datosJuego[4]));
 			juego.setEditor(datosJuego[5]);
+			juego.setVentas(Float.parseFloat(datosJuego[7]));
 		}
 		
 		return juego;
