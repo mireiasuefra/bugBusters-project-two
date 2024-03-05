@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import model.Juego;
 import service.JuegosService;
 
 @RestController
@@ -41,7 +42,7 @@ public class JuegosController {
 	public ResponseEntity<?> listadoJuegos() {
 		List<Juego> listado = service.findAll();
 		String responseBody;
-		if(listado.size == 0) {
+		if(listado.size() == 0) {
 			responseBody = "La BBDD no contiene ningun juego.";
 			return ResponseEntity.internalServerError().body(responseBody);
 		}

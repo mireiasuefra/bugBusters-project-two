@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 import controller.JuegosController;
+import model.Juego;
 import repository.JuegoDao;
 import service.JuegosService;
 import service.JuegosServiceImpl;
@@ -79,6 +80,6 @@ class LucasTeamV2ApplicationTests {
 		logger.info("Test::testListadoDevuelto(): Que la cantidad de juegos a mostrar por el servicio sea igual a la longitud del CSV inicial, ya que no hemos subido ningun juego todavía");
 		int longitudCSV = service.cargarListaInicial();
 		List<Juego> listado = service.findAll();
-		assertTrue(longitudCSV == listado.size);
+		assertTrue(longitudCSV == listado.size());
 	 }
 }
