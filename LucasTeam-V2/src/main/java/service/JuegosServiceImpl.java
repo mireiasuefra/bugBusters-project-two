@@ -91,6 +91,14 @@ public class JuegosServiceImpl implements JuegosService {
 	public List<Juego> findAll() {
 		return juegoDao.findAll();
 	}
+	
+	 @Override
+	    public Juego altaJuego(Juego juego) {
+	        // Lógica para almacenar el juego en la base de datos
+	        Juego juegoGuardado = juegoDao.save(juego);
+
+	        return juegoGuardado;
+	    }
 
 	
 }

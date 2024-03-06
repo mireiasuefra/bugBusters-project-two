@@ -12,5 +12,7 @@ public interface JuegosService {
 	List<Juego> findAll();
 
 	Optional<Juego> findById(int id);
-
+	
+	Juego altaJuego(Juego juego);
+	
 }
