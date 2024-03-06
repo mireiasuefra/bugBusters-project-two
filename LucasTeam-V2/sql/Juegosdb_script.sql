@@ -11,4 +11,4 @@ CREATE TABLE `juegos` (
   `editor` varchar(45) NOT NULL,
   `ventas` float(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
