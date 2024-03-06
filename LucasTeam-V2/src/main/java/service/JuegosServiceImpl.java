@@ -19,11 +19,6 @@ public class JuegosServiceImpl implements JuegosService {
 	private JuegoDao juegoDao;
 
 	@Override
-	public Optional<Juego> findById(int id) {
-		return juegoDao.findById(id);
-	}
-
-	@Override
 	public void cargarListaInicial() {
 		//int longCSV = 0;
         try (Scanner scanner = new Scanner(new File("res/juegos.csv"))) {
@@ -88,6 +83,11 @@ public class JuegosServiceImpl implements JuegosService {
 	@Override
 	public List<Juego> findAll() {
 		return juegoDao.findAll();
+	}
+	
+	@Override
+	public Optional<Juego> findById(int id) {
+		return juegoDao.findById(id);
 	}
 
 	
