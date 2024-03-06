@@ -35,7 +35,7 @@ public class Juego {
 	@NotEmpty(message = "El nombre no puede estar vacio")
 	private String nombre;
 
-	@Column(name = "fechaPublicacion")
+	@Column(name = "fecha_publicacion")
 	@Max(value = 2024)
 	@Positive
 	private int fechaPublicacion;
