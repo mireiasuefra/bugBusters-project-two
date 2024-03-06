@@ -6,7 +6,8 @@ import model.Juego;
 
 public interface JuegosService {
 
-	void cargarListaInicial();
+
+	int cargarListaInicial();
 
 	List<Juego> findAll();
 

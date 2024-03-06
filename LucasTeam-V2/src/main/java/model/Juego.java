@@ -3,7 +3,6 @@ package model;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +30,7 @@ public class Juego {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
+	
 	
 	@Column(name = "nombre")
 	@NotEmpty(message = "El nombre no puede estar vacio")
