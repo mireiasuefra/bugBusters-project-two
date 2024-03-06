@@ -37,7 +37,7 @@ public class JuegosController {
 		String responseBody;
 		if(datosCargados == 0) {
 			responseBody = "Ha habido un error al cargar los datos.";
-			return ResponseEntity.internalServerError().body(responseBody);
+			return ResponseEntity.ok(responseBody);
 		}
 		else {
 			responseBody = "Se han cargado " + datosCargados + " juegos en la BBDD.";
@@ -57,17 +57,28 @@ public class JuegosController {
 			return ResponseEntity.ok(listado);
 	}
 	
-	@GetMapping("/{id}")
-	public Juego encontrarJuego(@PathVariable int id) {
+	@GetMapping("/id={id}")
+	public Juego encontrarJuegoId(@PathVariable int id) {
 		return service.findById(id).orElseThrow(JuegoNotFoundException::new);
+	}
+	
+	@GetMapping("/nombre={nombre}")
+	public Juego encontrarJuegoNombre(@PathVariable String nombre) {
+		return service.findByNombre(nombre).orElseThrow(JuegoNotFoundException::new);
 	}
 	
 	@PostMapping
 	public ResponseEntity<?> altaJuego(@RequestBody Juego juego) {
-		Juego result = service.altaJuego(juego);
-		URI location = ServletUriComponentsBuilder
-				.fromCurrentRequest().path("/{id}").buildAndExpand(result.getId())
-				.toUri();
-		return ResponseEntity.created(location).build();
+		if(service.findByNombre(juego.getNombre()).isPresent()) {
+			return ResponseEntity.ok("Ya existe el juego: " + juego.getNombre() + " en la BBDD de BugsBusters.");
+		}
+		else {
+			Juego result = service.altaJuego(juego);
+			URI location = ServletUriComponentsBuilder
+					.fromCurrentRequest().path("/{id}").buildAndExpand(result.getId())
+					.toUri();
+			return ResponseEntity.created(location).build();
+		}
+		
 	}
 }

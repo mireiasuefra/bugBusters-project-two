@@ -14,6 +14,8 @@ public interface JuegosService {
 
 	Optional<Juego> findById(int id);
 	
+	Optional<Juego> findByNombre(String nombre);
+	
 	Juego altaJuego(Juego juego);
 	
 }

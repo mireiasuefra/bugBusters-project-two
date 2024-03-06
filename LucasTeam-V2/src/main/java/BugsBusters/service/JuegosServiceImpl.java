@@ -22,14 +22,17 @@ public class JuegosServiceImpl implements JuegosService {
 
 	@Override
 	public int cargarListaInicial() {
-		int longCSV = 0;
+//		int longCSV = 0;
 		Juego juegoEntity = null;
 
         try (Scanner scanner = new Scanner(new File("res/juegos.csv"))) {
 			scanner.nextLine();
 			while (scanner.hasNextLine()) {
-				juegoEntity = juegoDao.save(leerJuegoString(scanner.nextLine()));
-				++longCSV;
+				Juego nextJuego = leerJuegoString(scanner.nextLine());
+				if(juegoDao.findByNombre(nextJuego.getNombre()).isEmpty()) {
+					juegoEntity = juegoDao.save(nextJuego);
+//					++longCSV;
+				}
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage() + "res/juegos.csv not found");
@@ -95,7 +98,11 @@ public class JuegosServiceImpl implements JuegosService {
 	public Optional<Juego> findById(int id) {
 		return juegoDao.findById(id);
 	}
-
+	
+	@Override
+	public Optional<Juego> findByNombre(String nombre) {
+		return juegoDao.findByNombre(nombre);
+	}
 	 @Override
 	    public Juego altaJuego(Juego juego) {
 	        // Lógica para almacenar el juego en la base de datos
@@ -103,6 +110,8 @@ public class JuegosServiceImpl implements JuegosService {
 
 	        return juegoGuardado;
 	    }
+
+	
 
 	
 }

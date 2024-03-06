@@ -1,9 +1,8 @@
 package BugsBusters.repository;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import BugsBusters.model.Juego;
@@ -11,11 +10,6 @@ import BugsBusters.model.Juego;
 @Repository
 public interface JuegoDao extends JpaRepository<Juego ,Integer> {
 	
-	// no hacen falta, vienen de serie
-
-	// Juego save(Juego juego);
+	Optional<Juego> findByNombre(String nombre);
 	
-	// List<Juego> findAll();
-	
-	// Juego findById(Long id);
 }
