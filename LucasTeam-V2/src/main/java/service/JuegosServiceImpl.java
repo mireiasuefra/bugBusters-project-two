@@ -78,7 +78,7 @@ public class JuegosServiceImpl implements JuegosService {
 			} finally {
 				juego.setFechaPublicacion(fecha);
 			}
-
+			
 			juego.setGenero(Genre.fromString(datosJuego[4]));
 			juego.setEditor(datosJuego[5]);
 			juego.setVentas(Float.parseFloat(datosJuego[7]));
