@@ -9,9 +9,9 @@ public interface JuegosService {
 
 	int cargarListaInicial();
 
-	List<Juego> listadoJuegos();
+	List<Juego> findAll();
 
-	Optional<Juego> encontrarJuego(int id);
+	Optional<Juego> findById(int id);
 	
 	Juego altaJuego(Juego juego);
 	
