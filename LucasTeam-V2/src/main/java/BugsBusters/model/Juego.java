@@ -29,6 +29,7 @@ public class Juego {
 	@Column(name = "id")
 	private int id;
 	
+	
 	@Column(name = "nombre")
 	@NotEmpty(message = "El nombre no puede estar vacio")
 	private String nombre;

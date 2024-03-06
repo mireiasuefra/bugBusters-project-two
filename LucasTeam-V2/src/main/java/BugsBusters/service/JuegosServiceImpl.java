@@ -21,14 +21,10 @@ public class JuegosServiceImpl implements JuegosService {
 	private JuegoDao juegoDao;
 
 	@Override
-	public Optional<Juego> findById(int id) {
-		return juegoDao.findById(id);
-	}
-
-	@Override
 	public int cargarListaInicial() {
 		int longCSV = 0;
 		Juego juegoEntity = null;
+
         try (Scanner scanner = new Scanner(new File("res/juegos.csv"))) {
 			scanner.nextLine();
 			while (scanner.hasNextLine()) {
@@ -80,7 +76,7 @@ public class JuegosServiceImpl implements JuegosService {
 			} finally {
 				juego.setFechaPublicacion(fecha);
 			}
-
+			
 			juego.setGenero(Genre.fromString(datosJuego[4]));
 			juego.setEditor(datosJuego[5]);
 			juego.setVentas(Float.parseFloat(datosJuego[7]));
@@ -93,6 +89,20 @@ public class JuegosServiceImpl implements JuegosService {
 	public List<Juego> findAll() {
 		return juegoDao.findAll();
 	}
+	
+
+	@Override
+	public Optional<Juego> findById(int id) {
+		return juegoDao.findById(id);
+	}
+
+	 @Override
+	    public Juego altaJuego(Juego juego) {
+	        // Lógica para almacenar el juego en la base de datos
+	        Juego juegoGuardado = juegoDao.save(juego);
+
+	        return juegoGuardado;
+	    }
 
 	
 }
