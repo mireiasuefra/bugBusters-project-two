@@ -46,7 +46,7 @@ public class JuegosController {
 	
 	@GetMapping
 	public ResponseEntity<?> listadoJuegos() {
-		List<Juego> listado = service.findAll();
+		List<Juego> listado = service.listadoJuegos();
 		String responseBody;
 		if(listado.size() == 0) {
 			responseBody = "La BBDD no contiene ningun juego.";
@@ -58,7 +58,7 @@ public class JuegosController {
 	
 	@GetMapping("/{id}")
 	public Juego encontrarJuego(@PathVariable int id) {
-		return service.findById(id).orElseThrow(JuegoNotFoundException::new);
+		return service.encontrarJuego(id).orElseThrow(JuegoNotFoundException::new);
 	}
 	
 	@PostMapping

@@ -79,7 +79,7 @@ class LucasTeamV2ApplicationTests {
 	 public void testListadoDevuelto() {
 		logger.info("Test::testListadoDevuelto(): Que la cantidad de juegos a mostrar por el servicio sea igual a la longitud del CSV inicial, ya que no hemos subido ningun juego todavía");
 		int longitudCSV = service.cargarListaInicial();
-		List<Juego> listado = service.findAll();
+		List<Juego> listado = service.listadoJuegos();
 		assertTrue(longitudCSV == listado.size());
 	 }
 }

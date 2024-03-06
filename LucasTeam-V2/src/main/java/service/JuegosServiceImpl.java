@@ -84,13 +84,13 @@ public class JuegosServiceImpl implements JuegosService {
 	}
 	
 	@Override
-	public List<Juego> findAll() {
+	public List<Juego> listadoJuegos() {
 		return juegoDao.findAll();
 	}
 	
 
 	@Override
-	public Optional<Juego> findById(int id) {
+	public Optional<Juego> encontrarJuego(int id) {
 		return juegoDao.findById(id);
 	}
 
