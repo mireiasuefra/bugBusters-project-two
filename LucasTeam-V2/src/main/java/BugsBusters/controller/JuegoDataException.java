@@ -1,4 +1,4 @@
-package controller;
+package BugsBusters.controller;
 
 public class JuegoDataException {
 

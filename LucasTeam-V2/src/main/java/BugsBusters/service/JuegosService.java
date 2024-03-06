@@ -1,8 +1,9 @@
-package service;
+package BugsBusters.service;
 
 import java.util.List;
 import java.util.Optional;
-import model.Juego;
+
+import BugsBusters.model.Juego;
 
 public interface JuegosService {
 

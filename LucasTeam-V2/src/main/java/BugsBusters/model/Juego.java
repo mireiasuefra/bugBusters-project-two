@@ -1,4 +1,4 @@
-package model;
+package BugsBusters.model;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
@@ -14,16 +14,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
 @Table(name="juegos")
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
-@ToString
 public class Juego {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -33,7 +33,7 @@ public class Juego {
 	@NotEmpty(message = "El nombre no puede estar vacio")
 	private String nombre;
 
-	@Column(name = "fechaPublicacion")
+	@Column(name = "fecha_publicacion")
 	@Max(value = 2024)
 	@Positive
 	private int fechaPublicacion;

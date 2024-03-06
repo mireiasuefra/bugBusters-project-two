@@ -1,4 +1,4 @@
-package service;
+package BugsBusters.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,12 +7,14 @@ import java.util.Scanner;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import model.Genre;
-import model.Juego;
-import model.Platform;
-import repository.JuegoDao;
+import BugsBusters.model.Genre;
+import BugsBusters.model.Juego;
+import BugsBusters.model.Platform;
+import BugsBusters.repository.JuegoDao;
 
+@Service
 public class JuegosServiceImpl implements JuegosService {
 	
 	@Autowired

@@ -1,4 +1,4 @@
-package model;
+package BugsBusters.model;
 
 public enum Genre {
 	SPORTS("Sports"), PLATFORM("Platform"), RACING("Racing"), ROLE_PLAYING("Role-Playing"), PUZZLE("Puzzle"),

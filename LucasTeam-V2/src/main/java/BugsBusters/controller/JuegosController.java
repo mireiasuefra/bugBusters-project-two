@@ -1,4 +1,4 @@
-package controller;
+package BugsBusters.controller;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import BugsBusters.model.Juego;
+import BugsBusters.service.JuegosService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import model.Juego;
-import service.JuegosService;
 
 @RestController
 @RequestMapping("/juegos")
@@ -23,6 +23,8 @@ public class JuegosController {
 	private JuegosService service;
 	
 	private static final Logger log = LoggerFactory.getLogger(JuegosController.class);
+	
+	
 	
 	@GetMapping("/local")
 	public ResponseEntity<?> cargarListaLocal() {
@@ -38,13 +40,13 @@ public class JuegosController {
 		}
 	}
 	
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<?> listadoJuegos() {
 		List<Juego> listado = service.findAll();
 		String responseBody;
 		if(listado.size() == 0) {
 			responseBody = "La BBDD no contiene ningun juego.";
-			return ResponseEntity.internalServerError().body(responseBody);
+			return ResponseEntity.ok(responseBody);
 		}
 		else
 			return ResponseEntity.ok(listado);

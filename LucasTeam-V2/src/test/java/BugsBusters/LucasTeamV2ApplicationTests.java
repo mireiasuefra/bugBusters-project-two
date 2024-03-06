@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
-import controller.JuegosController;
-import model.Juego;
-import repository.JuegoDao;
-import service.JuegosService;
-import service.JuegosServiceImpl;
+import BugsBusters.controller.JuegosController;
+import BugsBusters.model.Juego;
+import BugsBusters.repository.JuegoDao;
+import BugsBusters.service.JuegosService;
+import BugsBusters.service.JuegosServiceImpl;
 
 import java.util.List;
 
@@ -26,13 +26,15 @@ class LucasTeamV2ApplicationTests {
 	private static byte cont = 1;
 	private static Logger logger;
 	
-	private JuegosService service = new JuegosServiceImpl();
+	@Autowired
+	private JuegosService service;
 
-	private JuegosController controller = new JuegosController();
+	@Autowired
+	private JuegosController controller;
 
 	static {
 		try {
-			logger = LogManager.getLogger(JuegoDao.class);
+			logger = LogManager.getLogger(LucasTeamV2ApplicationTests.class);
 		} catch (Throwable e) {
 			System.out.println("No funciona JUnit");
 		}
