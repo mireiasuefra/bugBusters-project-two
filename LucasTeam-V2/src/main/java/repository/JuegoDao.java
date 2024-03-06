@@ -11,11 +11,5 @@ import model.Juego;
 @Repository
 public interface JuegoDao extends JpaRepository<Juego ,Integer> {
 	
-	// no hacen falta, vienen de serie
-
-	// Juego save(Juego juego);
 	
-	// List<Juego> findAll();
-	
-	// Juego findById(Long id);
 }
