@@ -1,8 +1,9 @@
-package service;
+package BugsBusters.service;
 
 import java.util.List;
 import java.util.Optional;
-import model.Juego;
+
+import BugsBusters.model.Juego;
 
 public interface JuegosService {
 
@@ -12,6 +13,8 @@ public interface JuegosService {
 	List<Juego> findAll();
 
 	Optional<Juego> findById(int id);
+	
+	Optional<Juego> findByNombre(String nombre);
 	
 	Juego altaJuego(Juego juego);
 	

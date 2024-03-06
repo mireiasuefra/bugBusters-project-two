@@ -1,4 +1,4 @@
-package error;
+package BugsBusters.error;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,4 @@
-package error;
+package BugsBusters.error;
 
 import java.util.List;
 import java.util.Map;

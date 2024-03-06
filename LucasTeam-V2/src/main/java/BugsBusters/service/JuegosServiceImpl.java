@@ -1,4 +1,4 @@
-package service;
+package BugsBusters.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,12 +7,14 @@ import java.util.Scanner;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import model.Genre;
-import model.Juego;
-import model.Platform;
-import repository.JuegoDao;
+import BugsBusters.model.Genre;
+import BugsBusters.model.Juego;
+import BugsBusters.model.Platform;
+import BugsBusters.repository.JuegoDao;
 
+@Service
 public class JuegosServiceImpl implements JuegosService {
 	
 	@Autowired
@@ -20,14 +22,17 @@ public class JuegosServiceImpl implements JuegosService {
 
 	@Override
 	public int cargarListaInicial() {
-		int longCSV = 0;
+//		int longCSV = 0;
 		Juego juegoEntity = null;
 
         try (Scanner scanner = new Scanner(new File("res/juegos.csv"))) {
 			scanner.nextLine();
 			while (scanner.hasNextLine()) {
-				juegoEntity = juegoDao.save(leerJuegoString(scanner.nextLine()));
-				++longCSV;
+				Juego nextJuego = leerJuegoString(scanner.nextLine());
+				if(juegoDao.findByNombre(nextJuego.getNombre()).isEmpty()) {
+					juegoEntity = juegoDao.save(nextJuego);
+//					++longCSV;
+				}
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage() + "res/juegos.csv not found");
@@ -93,7 +98,11 @@ public class JuegosServiceImpl implements JuegosService {
 	public Optional<Juego> findById(int id) {
 		return juegoDao.findById(id);
 	}
-
+	
+	@Override
+	public Optional<Juego> findByNombre(String nombre) {
+		return juegoDao.findByNombre(nombre);
+	}
 	 @Override
 	    public Juego altaJuego(Juego juego) {
 	        // Lógica para almacenar el juego en la base de datos
@@ -101,6 +110,8 @@ public class JuegosServiceImpl implements JuegosService {
 
 	        return juegoGuardado;
 	    }
+
+	
 
 	
 }

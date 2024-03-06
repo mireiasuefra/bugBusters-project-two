@@ -1,4 +1,4 @@
-package controller;
+package BugsBusters.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -9,14 +9,10 @@ class JuegoNotFoundException extends RuntimeException {
 	
 	public JuegoNotFoundException() {
 		super("No existe el juego");
-		action1();
 	}
 	
 	public JuegoNotFoundException(Long id) {
 		super("No existe el juego con id " + id);
 	}
 	
-	public void action1() {
-		
-	}
 }

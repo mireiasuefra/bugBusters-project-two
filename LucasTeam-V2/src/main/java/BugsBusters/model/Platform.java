@@ -1,4 +1,4 @@
-package model;
+package BugsBusters.model;
 
 public enum Platform {
 	WII("Wii"), NES("NES"), GB("GB"), DS("DS"), X360("X360"), PS3("PS3"), PS2("PS2"), SNES("SNES"), GBA("GBA"),

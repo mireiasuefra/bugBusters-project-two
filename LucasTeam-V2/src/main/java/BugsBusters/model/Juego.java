@@ -1,4 +1,4 @@
-package model;
+package BugsBusters.model;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
@@ -21,9 +21,7 @@ import lombok.ToString;
 @Entity
 @Table(name="juegos")
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
-@ToString
 public class Juego {
 	
 	@Id
