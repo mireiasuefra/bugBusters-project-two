@@ -17,12 +17,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import BugsBusters.model.Juego;
 import BugsBusters.service.JuegosService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @RestController
 @RequestMapping("/juegos")
-@Tag(name = "Juegos", description = "LucaSteam API")
+@Tag(name = "juego", description = "LucaSteam API")
 public class JuegosController {
 
 	@Autowired
@@ -30,7 +35,13 @@ public class JuegosController {
 	
 	private static final Logger log = LoggerFactory.getLogger(JuegosController.class);
 	
-	
+	@Operation(
+			summary = "Cargar lista", description = "Carga la lista de juegos del CSV y los guarda en la base de datos", tags= {"juego"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Lista cargada y guardada", content = {
+							@Content(mediaType = "application/json", schema = @Schema(implementation = Juego.class))}),
+			@ApiResponse(responseCode = "400", description = "No valido ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "No se ha encontrado el CSV", content = @Content)})
 	@GetMapping("/local")
 	public ResponseEntity<?> cargarListaLocal() {
 		int datosCargados = service.cargarListaInicial();
@@ -45,6 +56,13 @@ public class JuegosController {
 		}
 	}
 	
+	@Operation(
+			summary = "Listar juegos", description = "Lista todos los juegos de la base de datos", tags= {"juego"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Juegos listados", content = {
+							@Content(mediaType = "application/json", schema = @Schema(implementation = Juego.class))}),
+			@ApiResponse(responseCode = "400", description = "No valido ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "No hay ningun juego", content = @Content)})
 	@GetMapping("/all")
 	public ResponseEntity<?> listadoJuegos() {
 		List<Juego> listado = service.findAll();
@@ -57,16 +75,37 @@ public class JuegosController {
 			return ResponseEntity.ok(listado);
 	}
 	
+	@Operation(
+			summary = "Buscar juego ID", description = "Busca y devuelve un juego dentro de la base de datos mediante id", tags= {"juego"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Juego localizado", content = {
+							@Content(mediaType = "application/json", schema = @Schema(implementation = Juego.class))}),
+			@ApiResponse(responseCode = "400", description = "No valido ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Juego no encontrado", content = @Content)})
 	@GetMapping("/id={id}")
 	public Juego encontrarJuegoId(@PathVariable int id) {
 		return service.findById(id).orElseThrow(JuegoNotFoundException::new);
 	}
 	
+	@Operation(
+			summary = "Buscar juego nombre", description = "Busca y devuelve un juego dentro de la base de datos mediante nombre", tags= {"juego"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Juego localizado", content = {
+							@Content(mediaType = "application/json", schema = @Schema(implementation = Juego.class))}),
+			@ApiResponse(responseCode = "400", description = "No valido ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Juego no encontrado", content = @Content)})
 	@GetMapping("/nombre={nombre}")
 	public Juego encontrarJuegoNombre(@PathVariable String nombre) {
 		return service.findByNombre(nombre).orElseThrow(JuegoNotFoundException::new);
 	}
 	
+	@Operation(
+			summary = "Subir juego", description = "Agrega un juego a la base de datos", tags= {"juego"})
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Juego agregado", content = {
+							@Content(mediaType = "application/json", schema = @Schema(implementation = Juego.class))}),
+			@ApiResponse(responseCode = "400", description = "No valido ", content = @Content),
+			@ApiResponse(responseCode = "404", description = "El juego proporcionado ya existe en la base de datos", content = @Content)})
 	@PostMapping
 	public ResponseEntity<?> altaJuego(@RequestBody Juego juego) {
 		if(service.findByNombre(juego.getNombre()).isPresent()) {
