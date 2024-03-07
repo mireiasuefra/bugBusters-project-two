@@ -18,6 +18,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Juego
+ * Es la clase que representa un juego en la base de datos
+ * 06/03/2024
+ * V2
+ * BugsBusters
+ */
 @Entity
 @Table(name="juegos")
 @NoArgsConstructor

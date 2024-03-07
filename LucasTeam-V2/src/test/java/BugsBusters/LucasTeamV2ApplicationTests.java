@@ -20,6 +20,13 @@ import BugsBusters.service.JuegosServiceImpl;
 
 import java.util.List;
 
+/**
+ * LucasTeamV2ApplicationTests
+ * Es la clase que se encarga de llevar a cabo las pruebas unitarias de la aplicación
+ * 06/03/2024
+ * V1
+ * BugsBusters
+ */
 @SpringBootTest
 class LucasTeamV2ApplicationTests {
 
@@ -42,18 +49,27 @@ class LucasTeamV2ApplicationTests {
 			System.out.println("No funciona JUnit");
 		}
 	}
-
+	
+	/**
+	 * Método ejecutado una vez antes de que se ejecuten las pruebas
+	 */
 	@BeforeAll
 	public static void onceExecutedBeforeAll() {
 		logger.info(">>> Iniciando pruebas...");
 	}
-
+	
+	/**
+	 * Método ejecutado antes de cada prueba
+	 */
 	@BeforeEach
 	public void executedBeforeEach() {
 		System.out.println("");
 		logger.info(">>> PRUEBA UNITARIA " + (cont++) + " <<<");
 	}
-
+	
+	/**
+	 * Método ejecutado una vez después de que se ejecuten las pruebas
+	 */
 	@AfterAll
 	public static void onceExecutedAfterAll() {
 		logger.info(">>> Terminado las pruebas unitarias");
@@ -90,6 +106,9 @@ class LucasTeamV2ApplicationTests {
 //		assertTrue(responseEntity.equals(responseExpected));
 //	 }
 	 
+	/**
+	 * Método para comprobar si el servicio tiene la misma longitud que el csv inicial
+	 */
 	 @Test
 	 public void testListadoDevuelto() {
 		logger.info("Test::testListadoDevuelto(): Que la cantidad de juegos a mostrar por el servicio sea igual a la longitud del CSV inicial, ya que no hemos subido ningun juego todavía");

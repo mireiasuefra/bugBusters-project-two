@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"BugsBusters"},{"l":"BugsBusters.config"},{"l":"BugsBusters.controller"},{"l":"BugsBusters.error"},{"l":"BugsBusters.model"},{"l":"BugsBusters.repository"},{"l":"BugsBusters.service"}];updateSearchResults();

@@ -9,8 +9,20 @@ import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 
+/**
+ * OpenApiConfig
+ * Es la clase que se encarga de la configuración de la OpenApi
+ * 06/03/2024
+ * V1
+ * BugsBusters
+ */
 @Configuration
 public class OpenApiConfig {
+	
+	/**
+	 * Método para configurar y generar la documentación OpenAPI para la API de Juego
+	 * @return Una instancia de OpenAPI que contiene la información de la documentación
+	 */
 	@Bean
     public OpenAPI JuegoOpenAPI() {
         return new OpenAPI()

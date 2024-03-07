@@ -19,7 +19,6 @@ import BugsBusters.model.Juego;
 import BugsBusters.service.JuegosService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-
 @RestController
 @RequestMapping("/juegos")
 @Tag(name = "Juegos", description = "LucaSteam API")
