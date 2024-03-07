@@ -32,22 +32,33 @@ public class JuegosServiceImpl implements JuegosService {
 	 */
 	@Override
 	public int cargarListaInicial() {
-//		int longCSV = 0;
+		int datosCargados = 0;
+		int lineas = 0;
+		Integer control = null;
 		Juego juegoEntity = null;
 
         try (Scanner scanner = new Scanner(new File("res/juegos.csv"))) {
 			scanner.nextLine();
 			while (scanner.hasNextLine()) {
+				++lineas;
 				Juego nextJuego = leerJuegoString(scanner.nextLine());
-				if(juegoDao.findByNombre(nextJuego.getNombre()).isEmpty()) {
+				control = juegoDao.idJuegoExistente(nextJuego.getNombre(),
+						nextJuego.getPlataforma(),
+						nextJuego.getEditor());
+				if(control == null) {
+					++datosCargados;
 					juegoEntity = juegoDao.save(nextJuego);
-//					++longCSV;
+//					juegoDao.save(nextJuego);
+					
 				}
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage() + "res/juegos.csv not found");
 		}
-        return juegoEntity.getId();
+//        return datosCargados;
+        if(lineas == datosCargados) return 1;
+        else if (datosCargados == 0) return 0;
+        else return 2;
 	}
 	
 	/**
@@ -128,18 +139,19 @@ public class JuegosServiceImpl implements JuegosService {
 		return juegoDao.findByNombre(nombre);
 	}
 	
+	
+
+	@Override
+	public Integer idJuegoSiExiste(Juego juego) {
+		return juegoDao.idJuegoExistente(juego.getNombre(), juego.getPlataforma(), juego.getEditor());
+	}
+	
 	/**
 	 * Método para añadir un juego en la base de datos
 	 */
-	 @Override
-	    public Juego altaJuego(Juego juego) {
-	        // Lógica para almacenar el juego en la base de datos
-	        Juego juegoGuardado = juegoDao.save(juego);
-
-	        return juegoGuardado;
-	    }
-
-	
-
+	@Override
+	public Juego altaJuego(Juego juego) {
+		return juegoDao.save(juego);
+	}
 	
 }

@@ -44,16 +44,19 @@ public class JuegosController {
 			@ApiResponse(responseCode = "404", description = "No se ha encontrado el CSV", content = @Content)})
 	@GetMapping("/local")
 	public ResponseEntity<?> cargarListaLocal() {
-		int datosCargados = service.cargarListaInicial();
-		String responseBody;
-		if(datosCargados == 0) {
-			responseBody = "Ha habido un error al cargar los datos.";
-			return ResponseEntity.ok(responseBody);
+		int respuestaCarga = service.cargarListaInicial();
+		String responseBody = "Error Desconocido";
+		if(respuestaCarga == 0) {
+			responseBody = "Ya estaban todos los datos cargados.";
 		}
-		else {
-			responseBody = "Se han cargado " + datosCargados + " juegos en la BBDD.";
-			return ResponseEntity.ok(responseBody);
+		else if (respuestaCarga == 1){
+			responseBody = "Se han cargado todos los juegos del CSV en la BBDD.";
 		}
+		else if(respuestaCarga == 2) {
+			responseBody = "Se han cargado los juegos del CSV QUE NO ESTABAN en la BBDD.";
+		}
+		return ResponseEntity.ok(responseBody);
+
 	}
 	
 	@Operation(
@@ -68,7 +71,7 @@ public class JuegosController {
 		List<Juego> listado = service.findAll();
 		String responseBody;
 		if(listado.size() == 0) {
-			responseBody = "La BBDD no contiene ningun juego.";
+			responseBody = "La BBDD no contiene ningun juego todavía.";
 			return ResponseEntity.ok(responseBody);
 		}
 		else
@@ -108,8 +111,10 @@ public class JuegosController {
 			@ApiResponse(responseCode = "404", description = "El juego proporcionado ya existe en la base de datos", content = @Content)})
 	@PostMapping
 	public ResponseEntity<?> altaJuego(@RequestBody Juego juego) {
-		if(service.findByNombre(juego.getNombre()).isPresent()) {
-			return ResponseEntity.ok("Ya existe el juego: " + juego.getNombre() + " en la BBDD de BugsBusters.");
+		Integer idExistente = service.idJuegoSiExiste(juego);
+		if(idExistente != null) {
+			return ResponseEntity.ok("Ya existe el juego: " + juego.getNombre() + " en la BBDD de BugsBusters con ID: "
+										+ idExistente + ".");
 		}
 		else {
 			Juego result = service.altaJuego(juego);

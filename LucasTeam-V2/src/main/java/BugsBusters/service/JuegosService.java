@@ -41,6 +41,9 @@ public interface JuegosService {
 	 */
 	Optional<Juego> findByNombre(String nombre);
 	
+	
+	Integer idJuegoSiExiste(Juego juego);
+	
 	/**
 	 * Método para añadir un juego en la base de datos
 	 * @param juego Juego a añadir
