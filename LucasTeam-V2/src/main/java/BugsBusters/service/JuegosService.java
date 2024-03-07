@@ -16,6 +16,8 @@ public interface JuegosService {
 	
 	Optional<Juego> findByNombre(String nombre);
 	
+	Integer idJuegoSiExiste(Juego juego);
+	
 	Juego altaJuego(Juego juego);
 	
 }
